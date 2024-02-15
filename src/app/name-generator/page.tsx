@@ -14,37 +14,84 @@ import { RxLetterCaseCapitalize } from "react-icons/rx";
 
 import {
   fonts,
+  Arrow,
   Dot_Saparater,
+  Foding_Effect,
   strikeThrough,
   tildeStrikeThrough,
   underline,
   doubleUnderline,
   slashThrough,
+  Finish,
   stinky,
+  Hyphen_case,
   heartsBetween,
   arrowBelow,
   crossAboveBelow,
   Magical_Fancy_Font,
+  Snake_case,
   Medical_Serif_Font,
   Lovely_Heart_Font,
+  Call_Me,
+  Pointing,
+  Fist,
+  Laughing,
+  Tongue,
+  Music_Notes,
+  Princess_Style,
+  Volume,
+  Food_Emojis,
+  Manuscript,
+  Air_Qoutes,
+  Barcode,  
+  Kiss,
+  Money,
+  Angry,
+  Birthday,
+  Drinks,
+  Love,
+  Bubbly_Bubbles,
 } from "./data";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../../components/ui/input";
 
 const combinedCharMap: any = {
+  Arrow: Arrow,
+  Bubbly_Bubbles:Bubbly_Bubbles,
+  Music_Notes: Music_Notes,
+  Princess_Style: Princess_Style,
+  Food_Emojis: Food_Emojis,
+  Manuscript: Manuscript,
+  Air_Qoutes: Air_Qoutes,
+  Barcode: Barcode,
   ...fonts,
   "Dot Saparater": Dot_Saparater,
+  "Hyphen case":Hyphen_case,
   "Magical Fancy Font": Magical_Fancy_Font,
   strikeThrough: strikeThrough,
+  "Foding Effect":Foding_Effect,
   tildeStrikeThrough: tildeStrikeThrough,
   underline: underline,
   doubleUnderline: doubleUnderline,
+  "Snake case":Snake_case,
   slashThrough: slashThrough,
   stinky: stinky,
   heartsBetween: heartsBetween,
   arrowBelow: arrowBelow,
   crossAboveBelow: crossAboveBelow,
+  Call_Me:Call_Me,
+  Pointing:Pointing,
+  Fist:Fist,
+  Laughing:Laughing,
+  Love:Love,
+  Tongue:Tongue,
+  Finish:Finish,
+  Kiss:Kiss,
+  Money:Money,
+  Angry:Angry,
+  Drinks:Drinks,
+  Birthday:Birthday,
   "Medical Serif Font": Medical_Serif_Font,
   "Lovely Heart Font": Lovely_Heart_Font,
 };
@@ -194,8 +241,10 @@ const FancyTextGenerator: React.FC = () => {
           onChange={handleInputChange}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-2 md:gap-10">
-        <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-2 md:gap-10 relative ">
+        <div             className="
+        sm:sticky sm:top-6 sm:max-h-[80vh]"
+>
           <p className="font-bold">Select a font style</p>
           <div className="mt-3 flex flex-row md:flex-col flex-wrap gap-y-2 font-bold">
             <div className="bg-white dark:bg-transparent border border-zinc-400 dark:text-white shadow-md flex px-6 py-2 text-black gap-2 rounded-full">
@@ -291,16 +340,15 @@ const FancyTextContainer: React.FC<FancyTextContainerProps> = ({
 
   const fancyText = generateFancyText(inputText);
   const [isCopied, setIsCopied] = useState(false);
-  const handleCopy = () => {
-    // Set the copied state to true
+    const handleCopy = () => {
+    navigator.clipboard.writeText(fancyText);
     setIsCopied(true);
 
-    // Reset the copied state after a short delay
+    // Reset the copy status after a certain duration
     setTimeout(() => {
       setIsCopied(false);
     }, 1000);
 
-    // Display toast notification
     toast.success("Copied to clipboard!", {
       position: "top-right",
       autoClose: 1000,
@@ -318,7 +366,7 @@ const FancyTextContainer: React.FC<FancyTextContainerProps> = ({
     >
       <div className="truncate mx-3">
         <h2 className="text-2xl font-bold truncate max-w-max">{fancyText}</h2>
-        <p className="text-zinc-400">{fontName}</p>
+        <p className="text-zinc-400 capitalize">{fontName.split("_").join(" ")}</p>
       </div>
       <button className="text-white font-bold rounded-xl px-4 py-2 bg-[#c209c1]">
         {isCopied ? (
@@ -327,7 +375,6 @@ const FancyTextContainer: React.FC<FancyTextContainerProps> = ({
           <button className="text-white">Copy</button>
         )}
       </button>
-
     </div>
   );
 };
